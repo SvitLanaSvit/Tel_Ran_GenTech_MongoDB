@@ -158,3 +158,53 @@ db.login_attempts.insertMany(
     }
     ]
 );
+
+db.transactions.insertMany(
+  [ 
+    {
+      'transaction_id': 't001',
+      'account_id': 'a001',
+      'amount': 50.00,
+      'currency': 'usd',
+      'transaction_type': 'debit',
+      'description': 'Grocery Shopping',
+      'created_at': new Date()
+    },
+    {
+      'transaction_id': 't002',
+      'account_id': 'a002',
+      'amount': 150.00,
+      'currency': 'usd',
+      'transaction_type': 'debit',
+      'description': 'Grocery Shopping',
+      'created_at': new Date()
+    },
+    {
+      'transaction_id': 't003',
+      'account_id': 'a003',
+      'amount': 250.00,
+      'currency': 'usd',
+      'transaction_type': 'debit',
+      'description': 'Grocery Shopping',
+      'created_at': new Date()
+    },
+    {
+      'transaction_id': 't004',
+      'account_id': 'a004',
+      'amount': 50.00,
+      'currency': 'usd',
+      'transaction_type': 'debit',
+      'description': 'Grocery Shopping',
+      'created_at': new Date()
+    },
+    {
+      'transaction_id': 't005',
+      'account_id': 'a003',
+      'amount': 50.00,
+      'currency': 'usd',
+      'transaction_type': 'debit',
+      'description': 'Grocery Shopping',
+      'created_at': new Date()
+    }
+  ]
+)

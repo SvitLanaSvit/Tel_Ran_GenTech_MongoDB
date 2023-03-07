@@ -1,5 +1,5 @@
  //(1) найти ко-во завершенных транзакций не в евро на сумму более 100
- db.transactions.find(
+ db.transactions.countDocuments(
      {
          "is_completed" : true,
          "currency": {"$ne": "eur"},

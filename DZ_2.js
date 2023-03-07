@@ -39,7 +39,10 @@ db.users.find(
     {
         "country": "China",
         "is_blocked": true,
-        "balance": 0
+        $or: [
+            { "balance": { $exists: true } },
+            { "balance": 0 }
+        ]
     }
 )
 

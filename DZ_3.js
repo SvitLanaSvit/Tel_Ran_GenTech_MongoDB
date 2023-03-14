@@ -124,8 +124,8 @@ db.users.aggregate([
     },
     {
         $match: {
-            sent_transactions: { $size: 0 }, 
-            received_transactions: { $size: 0 }
+            sent_transactions: { '$size': 0 }, 
+            received_transactions: { '$size': 0 }
         }
     },
     {

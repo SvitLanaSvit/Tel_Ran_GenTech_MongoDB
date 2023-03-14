@@ -96,8 +96,8 @@ db.users.aggregate([
     {
         '$match': {
             '$or': [
-                {'sender.is_completed': true, 'sender.amount': {'$gte': 10}},
-                {'recepient.is_completed': true, 'recepient.amount': {'$gte': 10}}
+                {'sender.is_completed': true, 'sender.amount': {'$gte': 10}, 'sender.currency': 'usd'},
+                {'recepient.is_completed': true, 'recepient.amount': {'$gte': 10}, 'recepient.currency': 'usd'}
             ]
         }
     },

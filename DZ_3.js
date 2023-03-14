@@ -16,7 +16,8 @@ db.transactions.aggregate([
     },
     {
         '$project': {
-            'amount': 1, 'id': 1, '_id': 0,
+            'id': 1, '_id': 0,
+            'amount_eur': '$amount', 
             'price_usd': {
                 '$multiply': ['$amount', 1.05]
             }

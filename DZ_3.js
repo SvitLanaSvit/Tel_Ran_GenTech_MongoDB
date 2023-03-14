@@ -73,19 +73,32 @@ db.transactions.aggregate([
 //(4) вывести всех незаблокированных пользователей, у которых есть завершенные (is_completed) транзакции от 10 usd 
 db.users.aggregate([
     {
+        '$match': {
+          'is_blocked': {'$ne': true}
+        }
+    },
+    {
         '$lookup': {
           'from': 'transactions',
           'localField': 'id',
           'foreignField': 'sender_id',
-          'as': 'transactions'
+          'as': 'sender'
+        }
+    },
+    {
+        '$lookup': {
+          'from': 'transactions',
+          'localField': 'id',
+          'foreignField': 'recepient_id',
+          'as': 'recepient'
         }
     },
     {
         '$match': {
-          'is_blocked': {'$ne': true},
-          'transactions.is_completed': true,
-          'transactions.currency': 'usd',
-          'transactions.amount': {'$gte': 10}
+            '$or': [
+                {'sender.is_completed': true, 'sender.amount': {'$gte': 10}},
+                {'recepient.is_completed': true, 'recepient.amount': {'$gte': 10}}
+            ]
         }
     },
     {

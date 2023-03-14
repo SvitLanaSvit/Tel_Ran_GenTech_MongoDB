@@ -28,6 +28,11 @@ db.transactions.aggregate([
 //(2) вывести количество USD-транзакций из 'China'
 db.transactions.aggregate([
     {
+        '$match': {
+            'currency': 'usd'
+        }
+    },
+    {
         '$lookup': {
             'from': 'users',
             'localField': 'sender_id',

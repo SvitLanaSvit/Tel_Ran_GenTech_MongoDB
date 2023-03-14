@@ -11,12 +11,15 @@ db.transactions.aggregate([
     {
         '$match': {
             'sender.is_europe': true,
-            'currency': 'usd'
+            'currency': 'eur'
         }
     },
     {
         '$project': {
-            'amount': 1, 'id': 1, '_id': 0
+            'amount': 1, 'id': 1, '_id': 0,
+            'price_usd': {
+                '$multiply': ['$amount', 1.05]
+            }
         }
     }
 ])

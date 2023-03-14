@@ -82,7 +82,7 @@ db.users.aggregate([
     },
     {
         '$match': {
-          'is_blocked': false,
+          'is_blocked': {'$ne': true},
           'transactions.is_completed': true,
           'transactions.currency': 'usd',
           'transactions.amount': {'$gte': 10}

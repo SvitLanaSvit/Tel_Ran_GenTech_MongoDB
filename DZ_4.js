@@ -18,6 +18,9 @@ db.goods.aggregate([
 //(2) Вывести общую и среднюю продолжительность звонков по каждой теме
 db.calls.aggregate([
     {
+        '$unwind': '$topic'
+    },
+    {
         '$group': {
             '_id': '$topic',
             'total_duration': {'$sum': '$duration_secs'},
@@ -29,28 +32,27 @@ db.calls.aggregate([
 //(3) Вывести тему звонков, по которой общались меньше всего
 db.calls.aggregate([
     {
+        '$unwind': '$topic'
+    },
+    {
         '$group': {
             '_id': '$topic',
-            'total_duration': {'$sum': '$duration_secs'}
+            'total_duration_secs': {'$sum': '$duration_secs'}
         }
     },
     {
         '$sort': {
-            'total_duration': 1
+            'total_duration_secs': 1
         }
     },
     {
         '$limit': 1
-    },
-    
+    },   
     {
         '$project': {
             'theme_of_call': '$_id',
             '_id': 0,
-            'total_duration': 1
+            'total_duration_secs': 1
         }
-    },
-    {
-        '$unwind': '$theme_of_call'
-    }
+    } 
 ])
